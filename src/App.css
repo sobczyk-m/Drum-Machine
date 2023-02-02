@@ -1,38 +1,163 @@
-.App {
-  text-align: center;
+:root {
+    --primary-color: orange;
+    --secondary-color: #dfdbdb;
+    --drum-machine-bg: #575353;
+    --switch-case-bg: rgba(41, 36, 36, 0.77);
+    --slider-track-bg: rgba(221, 221, 221, 0.77);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+    font-size: 16px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#root {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
 }
 
-.App-link {
-  color: #61dafb;
+#drum-machine {
+    width: 500px;
+    height: 300px;
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    background-color: var(--drum-machine-bg);
+    border-top: 5px solid var(--primary-color);
+    border-left: 5px solid var(--primary-color);
+    border-bottom: 12px solid var(--primary-color);
+    border-right: 12px solid var(--primary-color);
+    box-shadow: -10px -10px 15px 2px var(--drum-machine-bg);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#drums-container {
+    width: 60%;
+    padding: 1rem;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.drum-pad {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(211deg, #5cb072, #283261);
+    animation: keyboard-backlight 3s alternate 5s infinite;
+    border-radius: 16px;
+    box-shadow: 2px 2px 5px 0 var(--primary-color);
+}
+
+#settings-container {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+#display {
+    height: 2.2rem;
+    width: 100%;
+    padding: 2px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background: var(--switch-case-bg);
+    border: 1px solid var(--slider-track-bg);
+}
+
+#volume {
+    width: 100%;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 5px;
+    background: var(--slider-track-bg);
+    border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: 1rem;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary-color);
+    margin-top: -5px;
+}
+
+input[type="range"]::-moz-range-track {
+    height: 5px;
+    background: var(--slider-track-bg);
+    border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 1rem;
+    width: 1rem;
+    margin-top: -5px;
+    border-radius: 50%;
+    background: var(--primary-color);
+}
+
+@keyframes keyboard-backlight {
+    from {
+        box-shadow: none;
+    }
+    to {
+        box-shadow: 2px 2px 4px 0 var(--primary-color);
+    }
+}
+
+@media (width < 500px) {
+    #drum-machine {
+        flex-direction: column;
+    }
+
+    #drums-container {
+        width: 100%;
+        grid-template: repeat(3, minmax(40px, auto)) / repeat(3, 1fr);
+        padding: 0.5rem 1rem;
+    }
+
+    #settings-container {
+        width: 100%;
+        font-size: 0.8rem;
+        display: grid;
+        grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+        justify-items: center;
+        column-gap: 0.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    #display {
+        font-size: 0.8rem;
+        width: 80%;
+    }
 }
